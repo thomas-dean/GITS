@@ -12,8 +12,7 @@
     GRANT USAGE ON SCHEMA gits to your_user;
     GRANT ALL ON ALL TABLES IN SCHEMA gits TO your_user;
     ``` 
-5. Run all scripts in the `sequences` directory.
-6. Run all scripts in the `tables` directory.
+5. Run all scripts in the `tables` directory.
     - NOTE: This may require some fiddling with the order you run the scripts. 
 
 ## Overview
