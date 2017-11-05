@@ -14,6 +14,7 @@
     ``` 
 5. Run all scripts in the `tables` directory.
     - NOTE: This may require some fiddling with the order you run the scripts. 
+6. Run all scripts in the `data` directory.
 
 ## Overview
 

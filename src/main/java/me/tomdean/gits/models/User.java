@@ -9,10 +9,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "user_name")
     private String userName;
     private String password;
+    @Column(name = "employee_number")
     private int employeeNumber;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles", schema = "gits")
     private Set<Role> roles;
 
     public Long getId() {
@@ -73,7 +76,7 @@ public class User {
 
         User user = (User) o;
 
-        if (getId().equals(user.getId())) return false;
+        if (!getId().equals(user.getId())) return false;
         if (getEmployeeNumber() != user.getEmployeeNumber()) return false;
         if (!getUserName().equals(user.getUserName())) return false;
         if (!getPassword().equals(user.getPassword())) return false;

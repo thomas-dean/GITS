@@ -8,7 +8,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String role;
+    private String role = RoleType.USER.getRoleType();
 
     public Long getId() {
         return id;
@@ -23,7 +23,6 @@ public class Role {
     }
 
     public String getRole() {
-
         return role;
     }
 
@@ -42,7 +41,7 @@ public class Role {
 
         Role role1 = (Role) o;
 
-        if (getId().equals(role1.getId())) return false;
+        if (!getId().equals(role1.getId())) return false;
         return getRole().equals(role1.getRole());
     }
 
