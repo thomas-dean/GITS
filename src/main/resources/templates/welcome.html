@@ -7,6 +7,11 @@
 <div class="success">
     This is a welcome page.
     <p th:text="${greeting}">Some text...</p>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <input type="submit">Log Out</input>
+    </form>
 </div>
 </body>
 </html>
