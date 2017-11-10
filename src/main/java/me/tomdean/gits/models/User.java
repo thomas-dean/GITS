@@ -14,6 +14,8 @@ public class User {
     private String password;
     @Column(name = "employee_number")
     private int employeeNumber;
+    @Column(name = "job_title")
+    private String jobTitle;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", schema = "gits")
     private Set<Role> roles;
@@ -50,6 +52,14 @@ public class User {
         this.employeeNumber = employeeNumber;
     }
 
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -65,6 +75,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", employeeNumber=" + employeeNumber +
+                ", jobTitle=" + jobTitle +
                 ", roles=" + roles +
                 '}';
     }
@@ -78,6 +89,7 @@ public class User {
 
         if (!getId().equals(user.getId())) return false;
         if (getEmployeeNumber() != user.getEmployeeNumber()) return false;
+        if (!getJobTitle().equals(user.getJobTitle())) return false;
         if (!getUserName().equals(user.getUserName())) return false;
         if (!getPassword().equals(user.getPassword())) return false;
         return getRoles().equals(user.getRoles());
@@ -89,6 +101,7 @@ public class User {
         result = 31 * result + getUserName().hashCode();
         result = 31 * result + getPassword().hashCode();
         result = 31 * result + getEmployeeNumber();
+        result = 31 * result + getJobTitle().hashCode();
         result = 31 * result + getRoles().hashCode();
         return result;
     }

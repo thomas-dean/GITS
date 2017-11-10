@@ -39,6 +39,7 @@ public class UserServiceTest {
         savedUser.setPassword(password);
         savedUser.setUserName("john.doe");
         savedUser.setEmployeeNumber(112233);
+        savedUser.setJobTitle("Some title");
         savedUser.setRoles(userRoles);
 
         userService.save(savedUser);
