@@ -1,5 +1,7 @@
+CREATE SEQUENCE IF NOT EXISTS gits.incident_id_seq;
+
 CREATE TABLE IF NOT EXISTS gits.incident (
-  id                          BIGINT            PRIMARY KEY,
+  id                          BIGINT            PRIMARY KEY DEFAULT nextval('gits.incident_id_seq'::regclass),
   date_on_site                TIMESTAMP         NOT NULL,
   date_created                TIMESTAMP         DEFAULT CURRENT_DATE,
   date_cleaned_up             TIMESTAMP         ,
