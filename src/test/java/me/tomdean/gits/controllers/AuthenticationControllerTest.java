@@ -60,7 +60,7 @@ public class AuthenticationControllerTest {
         mockMvc.perform(post("/login").with(csrf())
                 .param("username", "john.doe")
                 .param("password", "invalid"))
-                .andExpect(status().is3xxRedirection())
+                .andExpect(status().isFound())
                 .andExpect(redirectedUrl("/login?error"));
     }
 
@@ -72,7 +72,7 @@ public class AuthenticationControllerTest {
         mockMvc.perform(post("/login").with(csrf())
                 .param("username", "john.doe")
                 .param("password", "password"))
-                    .andExpect(status().is3xxRedirection())
+                    .andExpect(status().isFound())
                     .andExpect(redirectedUrl("/"));
     }
 
@@ -101,7 +101,7 @@ public class AuthenticationControllerTest {
     @Test
     public void shouldRedirectToLoginAfterLogout() throws Exception {
         mockMvc.perform(logout())
-                .andExpect(status().is3xxRedirection())
+                .andExpect(status().isFound())
                 .andExpect(redirectedUrl("/login?logout"));
     }
 }
