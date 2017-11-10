@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Arrays;
 
 @Entity
-@Table(name = "graffiti_image", schema = "gits")
-public class GraffitiImage {
+@Table(name = "image", schema = "gits")
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,7 +39,7 @@ public class GraffitiImage {
 
     @Override
     public String toString() {
-        return "GraffitiImage{" +
+        return "Image{" +
                 "id=" + id +
                 ", data=" + Arrays.toString(data) +
                 ", incident=" + incident +
@@ -51,11 +51,11 @@ public class GraffitiImage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GraffitiImage graffitiImage = (GraffitiImage) o;
+        Image image = (Image) o;
 
-        if (getId() != null ? !getId().equals(graffitiImage.getId()) : graffitiImage.getId() != null) return false;
-        if (!Arrays.equals(getData(), graffitiImage.getData())) return false;
-        return getIncident().equals(graffitiImage.getIncident());
+        if (getId() != null ? !getId().equals(image.getId()) : image.getId() != null) return false;
+        if (!Arrays.equals(getData(), image.getData())) return false;
+        return getIncident().equals(image.getIncident());
     }
 
     @Override

@@ -26,8 +26,9 @@ public class Incident {
     private InvestigationStatus investigationStatus;
     @ManyToOne(fetch = FetchType.EAGER)
     private Structure structure;
-    @OneToMany
-    private Set<GraffitiImage> images;
+    @JoinTable(name = "incident_images", schema = "gits")
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<Image> images;
     private String address;
     @Column(name = "nearest_cross_streets")
     private String nearestCrossStreets;
@@ -109,11 +110,11 @@ public class Incident {
         this.structure = structure;
     }
 
-    public Set<GraffitiImage> getImages() {
+    public Set<Image> getImages() {
         return images;
     }
 
-    public void setImages(Set<GraffitiImage> images) {
+    public void setImages(Set<Image> images) {
         this.images = images;
     }
 
