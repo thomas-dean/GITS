@@ -16,30 +16,32 @@ public class Incident {
     private Date dateCreated;
     @Column(name = "date_cleaned_up")
     private Date dateCleanedUp;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private CleanupEffort effort;
     @JoinColumn(name = "amount_of_damage_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Damage amountOfDamage;
     @JoinColumn(name = "investigation_status_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private InvestigationStatus investigationStatus;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Structure structure;
+    @OneToMany
+    private Set<GraffitiImage> images;
     private String address;
     @Column(name = "nearest_cross_streets")
     private String nearestCrossStreets;
     private double latitude;
     private double longitude;
     private String moniker;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User submitter;
     @JoinColumn(name = "law_enforcement_official_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User lawEnforcementOfficial;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Crew crew;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "incident_suspects", schema = "gits")
     private Set<Suspect> suspects;
 
@@ -105,6 +107,14 @@ public class Incident {
 
     public void setStructure(Structure structure) {
         this.structure = structure;
+    }
+
+    public Set<GraffitiImage> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<GraffitiImage> images) {
+        this.images = images;
     }
 
     public String getAddress() {
@@ -190,6 +200,7 @@ public class Incident {
                 ", amountOfDamage=" + amountOfDamage +
                 ", investigationStatus=" + investigationStatus +
                 ", structure=" + structure +
+                ", images=" + images +
                 ", address='" + address + '\'' +
                 ", nearestCrossStreets='" + nearestCrossStreets + '\'' +
                 ", latitude=" + latitude +
@@ -226,6 +237,8 @@ public class Incident {
             return false;
         if (getStructure() != null ? !getStructure().equals(incident.getStructure()) : incident.getStructure() != null)
             return false;
+        if (getImages() != null ? !getImages().equals(incident.getImages()) : incident.getImages() != null)
+            return false;
         if (getAddress() != null ? !getAddress().equals(incident.getAddress()) : incident.getAddress() != null)
             return false;
         if (getNearestCrossStreets() != null ? !getNearestCrossStreets().equals(incident.getNearestCrossStreets()) : incident.getNearestCrossStreets() != null)
@@ -252,6 +265,7 @@ public class Incident {
         result = 31 * result + (getAmountOfDamage() != null ? getAmountOfDamage().hashCode() : 0);
         result = 31 * result + (getInvestigationStatus() != null ? getInvestigationStatus().hashCode() : 0);
         result = 31 * result + (getStructure() != null ? getStructure().hashCode() : 0);
+        result = 31 * result + (getImages() != null ? getImages().hashCode() : 0);
         result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
         result = 31 * result + (getNearestCrossStreets() != null ? getNearestCrossStreets().hashCode() : 0);
         temp = Double.doubleToLongBits(getLatitude());
