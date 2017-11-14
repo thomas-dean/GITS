@@ -107,7 +107,7 @@ public class IncidentServiceTest {
     @Test
     public void shouldFindAllIncidents() throws Exception {
         List<Incident> allIncidents = incidentService.findAll();
-        assertThat(1, is(allIncidents.size()));
+        assertThat(allIncidents.size(), is(1));
         for (Incident i: allIncidents) {
             assertThat(savedIncident, is(i));
         }
