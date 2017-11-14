@@ -1,12 +1,17 @@
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"></meta>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
     <title>Welcome page</title>
 </head>
 <body>
 <div class="success">
     This is a welcome page.
+    <!--/*@thymesVar id="greeting" type="java.lang.String"*/-->
     <p th:text="${greeting}">Some text...</p>
+
+    <p><a th:href="@{/incidents/new}">Add new incident</a></p>
+    <p><a th:href="@{/incidents}">View All incidents</a></p>
 
     <form th:action="@{/logout}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

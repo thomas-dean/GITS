@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8" />
+    <title>Incidents</title>
+</head>
+<body>
+    <h1>Incidents:</h1>
+    <table>
+        <thead>
+            <tr>
+                    <th>ID</th>
+                    <th>Submitter</th>
+                    <th>Crew ID</th>
+                    <th>Supervisor's Name</th>
+                    <th>(Latitude, Longitude)</th>
+                    <th>Date Found</th>
+                    <th>Clean Up</th>
+                    <th>Moniker</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--/*@thymesVar id="incidents" type="java.util.List<me.tomdean.gits.models.Incident>"*/-->
+            <tr th:each="incident: ${incidents}">
+                <td><a th:text="${incident.getId()}" th:href="@{'/incidents/' + ${incident.getId()}}">Incident ID></a></td>
+                <td th:text="${incident.getSubmitter().getUserName()}">Submitter</td>
+                <td th:text="${incident.getCrew().getCrewId()}">Crew ID</td>
+                <td th:text="${incident.getCrew().getSupervisor()}">Supervisor</td>
+                <td th:text="${'(' + incident.getLatitude() + ', ' + incident.getLongitude() + ')'}">(Lat, Long)</td>
+                <td th:text="${incident.getDateOnSite()}">Found</td>
+                <td th:text="${incident.getEffort().getEffort()}">Effort</td>
+                <td th:text="${incident.getMoniker()}">Moniker</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

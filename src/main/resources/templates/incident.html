@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!--/*@thymesVar id="incident" type="me.tomdean.gits.models.Incident"*/-->
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="'Incident ' + ${incident.id}">Incident ID</title>
+</head>
+<body>
+    <h1 th:text="'Incident ' + ${incident.getId()}">Incident ID</h1>
+
+    <p th:text="'Date on site: ' + ${incident.getDateOnSite()}">Date on site</p>
+    <p th:text="'Date created: ' + ${incident.getDateCreated()}">Date created</p>
+    <p th:text="'Date cleaned up: ' + ${incident.getDateCleanedUp()}">Date cleaned up</p>
+    <p th:text="'Effort of cleanup: ' + ${incident.getEffort().getEffort()}">Effort</p>
+    <p th:text="'Amount of damage: ' + ${incident.getAmountOfDamage().getDamage()}">Damage</p>
+    <p th:text="'Investigation status: ' + ${incident.getInvestigationStatus().getStatus()}">Status</p>
+    <p th:text="'Type of structure: ' + ${incident.getStructure().getStructure()}">Structure</p>
+    <p th:text="'Address: ' + ${incident.getAddress()}">Address</p>
+    <p th:text="'Nearest cross streets: ' + ${incident.getNearestCrossStreets()}">Cross streets</p>
+    <p th:text="'Latitude: ' + ${incident.getLongitude()}">Lat</p>
+    <p th:text="'Longitude: ' + ${incident.getLongitude()}">Long</p>
+    <p th:text="'Moniker: ' + ${incident.getMoniker()}">Moniker</p>
+    <p th:text="'Submitter: ' + ${incident.getSubmitter().getUserName()} + ' (' + ${incident.getSubmitter().getEmployeeNumber()} + ')'">Submitter (ID)</p>
+    <!--<p th:text="'Law enforcement official: ' + ${incident.getLawEnforcementOfficial().getUserName()} + ' (' + ${incident.getLawEnforcementOfficial().getEmployeeNumber()} + ')'">Law enforcement official (ID)</p>-->
+    <p th:text="'Crew ID: ' + ${incident.getCrew().getCrewId()}">Crew ID</p>
+    <p th:text="'Crew Supervisor: ' + ${incident.getCrew().getSupervisor()}">Supervisor</p>
+
+    <h3>Suspects:</h3>
+    <!--/*@thymesVar id="suspect" type="me.tomdean.gits.models.Suspect"*/-->
+    <p th:each="suspect: ${incident.getSuspects()}" th:text="${suspect.getName()}">Suspect Name</p>
+
+    <h3>Images:</h3>
+    <!--/*@thymesVar id="image" type="me.tomdean.gits.models.Image"*/-->
+    <img th:each="image: ${incident.getImages()}" th:src="@{'/incidents/images/' + ${image.getId()}}" />
+</body>
+</html>
