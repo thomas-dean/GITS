@@ -2,6 +2,7 @@ package me.tomdean.gits.daos;
 
 import me.tomdean.gits.models.Incident;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +25,8 @@ public class IncidentDaoImpl extends AbstractDao<Long, Incident> implements Inci
     public List<Incident> findAll() {
         Criteria crit = createEntityCriteria();
         crit.addOrder(Order.asc("dateCreated"));
+        /* TODO: This is a work around for hibernate creating an outer join which causes duplicated records */
+        crit.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         return (List<Incident>) crit.list();
     }
 
